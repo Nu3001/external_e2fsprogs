@@ -139,6 +139,24 @@ e2fsck_cflags := -O2 -g -W -Wall \
         -DHAVE_SYS_PARAM_H \
 	-DHAVE_SYSCONF
 
+
+include $(CLEAR_VARS)
+
+LOCAL_STATIC_LIBRARIES := \
+        $(libext2_profile_system_shared_libraries) \
+        $(libext2_profile_shared_libraries)
+
+LOCAL_SRC_FILES := $(libext2_profile_src_files)
+LOCAL_SYSTEM_SHARED_LIBRARIES := $(libext2_profile_system_shared_libraries)
+LOCAL_SHARED_LIBRARIES := $(libext2_profile_shared_libraries)
+LOCAL_C_INCLUDES := $(libext2_profile_c_includes)
+LOCAL_CFLAGS := $(libext2_profile_cflags)
+LOCAL_PRELINK_MODULE := false
+LOCAL_MODULE := libext2_profile
+LOCAL_MODULE_TAGS := optional
+
+include $(BUILD_SHARED_LIBRARY)
+
 include $(CLEAR_VARS)
 
 LOCAL_STATIC_LIBRARIES := \
@@ -153,7 +171,7 @@ LOCAL_CFLAGS := $(e2fsck_cflags)
 LOCAL_MODULE := e2fsck
 LOCAL_MODULE_TAGS := optional
 LOCAL_FORCE_STATIC_EXECUTABLE := true
-LOCAL_MODULE_PATH := $(TARGET_ROOT_OUT_SBIN)
+#LOCAL_MODULE_PATH := $(TARGET_ROOT_OUT_SBIN)
 include $(BUILD_EXECUTABLE)
 
 include $(CLEAR_VARS)
